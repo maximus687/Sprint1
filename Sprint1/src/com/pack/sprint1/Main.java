@@ -30,7 +30,7 @@ public class Main {
 		{
 			
 			System.out.println("Press:\n\t1.Add Theater\n\t2.Add Movie\n\t3.Add Screen"
-					+ "\n\t4.Add Show\n\t5.Delete Theatre\n\t6.Delete Movie\n\t.7Delete Screen\n\t8.Delete Show");
+					+ "\n\t4.Add Show\n\t5.Delete Theatre\n\t6.Delete Movie\n\t7.Delete Screen\n\t8.Delete Show");
 			int ch=s.nextInt();
 			switch(ch) {
 			case 1  :{

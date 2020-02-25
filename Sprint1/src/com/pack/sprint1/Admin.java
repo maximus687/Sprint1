@@ -63,74 +63,25 @@ public class Admin {
 		Scanner s =new Scanner(System.in);
 		Scanner sc =new Scanner(System.in);
 		System.out.println("Enter theater id:");
-		int thid= s.nextInt();
+		int thid=s.nextInt();
+		int x=checkDigit(thid);
+		int length = String.valueOf(thid).length();
+		if(length<4 || x!=2) {
+			System.out.println("Not a Valid Theatre id ");
+		}
 		System.out.println("Enter Theater name: ");
 		String thName=sc.next();
 		System.out.println("Enter the city: ");
 		String thCity=sc.next();
 		
-		//Movie class variables
-		//put all the variable in list Movie
-		System.out.println("Enter the movie Id: ");
-		int movieId=s.nextInt();
-		LocalDate movieReleaseDate;
-		//Taking input from user of movie details
-		System.out.println("Enter the Movie Name: ");
-		String mName= sc.next();
-		System.out.println("Enter the Director Name:");
-		String mDirector=sc.next();
-		System.out.println("Enter length of movie in minutes:");
-		int mLength =s.nextInt();
-		System.out.println("Enter the Three languages of movie: ");
-		String[] lang=new String[3];
-		for(int i=0;i<3;i++) {
-			lang[i]=sc.next();
-		}
-		System.out.println("Enter the Release Date in format: yyyy-mm-dd ");
-		movieReleaseDate= LocalDate.parse(sc.next());
-		//Adding Elements to the Movie list
+		//Calling addMovie method
 		List<Movie> ml =new ArrayList<Movie>();
-		ml.add(new Movie(movieId,mName,mDirector,mLength,lang,movieReleaseDate));//all the data been added to movie list
-		//hence movie list created
+		ml=addMovie();
+		//Calling addScreen method
 		
-		//Screen class variables
-		//Put all the variable in list Screen
-		System.out.println("Enter the screen id(integer): ");
-		int screenId= s.nextInt();
-		// System.out.println("Enter the TheaterId: ");
-		int theatreId=thid;
-		System.out.println("Enter the screen name: ");
-		String screenName=sc.next();
-		System.out.println("Enter the Movie End Date in format: yyyy-mm-dd ");
-		LocalDate movieEndDate= LocalDate.parse(sc.next());	
-		
-//Show class variable		
-		List<Show> show=new ArrayList<Show>();
-		System.out.println("Enter Show id: ");
-	    int showId=s.nextInt();
-	    System.out.println("Enter the Show Start time in format: hr:mm:ss");
-		LocalTime showStartTime=LocalTime.parse(sc.next());
-		System.out.println("Enter the Show End time in format: hr:mm:ss");
-		LocalTime showEndTime=LocalTime.parse(sc.next());
-		
-		//seat class variables
-		
-		List<Integer> seat=new ArrayList<Integer>() ;
-        System.out.println("Enter the seat number: ");
-        seat.add(s.nextInt());
-		System.out.println("Enter the Show name: ");
-		String showName=sc.next();
-		System.out.println("Enter the movie Name: ");
-		String movieName=sc.next();
-		//rows and columns variable are of screen class
-		System.out.println("Enter the row number: ");
-		int rows=s.nextInt();
-		System.out.println("Enter the column number:");
-		int columns=s.nextInt();
-		show.add(new Show(showId,showStartTime,showEndTime,seat,showName,movieName));
-		//hence List of Show class created
 		List<Screen> lOScreen=new ArrayList<Screen>();
-		lOScreen.add(new Screen(screenId,theatreId,screenName,movieEndDate,show,rows,columns));
+		lOScreen=addScreen();
+		
 		//HENCE LIST OF SCREEN CLASS CREATED 
 		
 		//managerName and managerContact of Theater Class
@@ -149,6 +100,11 @@ public class Admin {
 	    	Scanner sc=new Scanner(System.in);
 	    	System.out.println("Enter the movie Id: ");
 			int movieId=s.nextInt();
+			int x=checkDigit(movieId);
+			int length = String.valueOf(movieId).length();
+			if(length<4 || x!=3) {
+				System.out.println("Not a Valid Movie id ");
+			}
 			System.out.println("Enter the Movie Name: ");
 			String mName= sc.next();
 			System.out.println("Enter the Director Name:");
@@ -170,10 +126,14 @@ public class Admin {
 	    public static List<Screen> addScreen() {
 	    	Scanner s=new Scanner(System.in);
 	    	Scanner sc=new Scanner(System.in);
-	    	System.out.println("Enter the screen id(integer): ");
-			int screenId= s.nextInt();
-			System.out.println("Enter the TheaterId: ");
+	    	System.out.println("Enter the TheaterId: ");
 			int theatreId=s.nextInt();
+	    	System.out.println("Enter the screen id(integer): ");
+			int screenId= Integer.parseInt(Integer.toString(theatreId) + Integer.toString(s.nextInt()));
+			int length = String.valueOf(screenId).length();
+			if(length<4) {
+				System.out.println("Not a Valid Theatre id ");
+			}
 			System.out.println("Enter the screen name: ");
 			String screenName=sc.next();
 			System.out.println("Enter the Movie End Date in format: yyyy-mm-dd ");
@@ -288,6 +248,15 @@ public class Admin {
 		   }
 		   
 		return x;
+	   }
+	   public static int checkDigit(int num) {
+		   int n=num;
+		   int digit=0;
+		   while(n>0) {
+			   digit=n%10;
+			   n=n/10;
+		   }
+		   return digit ;
 	   }
 	   
 }
